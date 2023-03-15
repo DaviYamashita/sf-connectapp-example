@@ -52,14 +52,13 @@ app.post('/refreshToken', (req, res) => {
 
 //obter dados do signed request (somente para *teste de exemplo*)
 app.get('/refreshToken', (req, res) => {
-
+  res.status(200).send(svdata)
 })
 
-//files
-let mapping = {
+//mapeamento dos arquivos para requisição
+let mapping = { 
   '/webapp/canvas-all.js': ['/node_modules/@salesforce/canvas-js-sdk/js', 'canvas-all.js'],
   '/webapp/controller.js': ['/webapp', 'controller.js'],
-  '/test': ['/webapp', 'test.html'],
   '/webapp/index.html': ['/webapp', 'index.html'],
   '/webapp/auth.html': ['/webapp', 'auth.html'],
   '/callback': ['/webapp', 'callback.html'],
@@ -73,32 +72,6 @@ for (let k in mapping) {
     res.sendFile(file, { 'root':require('path').join(__dirname)+path})
   })
 }
-
-
-/*app.post('/webapp/storeToken', (req, res) => {
-  console.log(req.body)
-  console.log('TEST')
-  console.log(
-    parseSignedRequest(req.body.signature, SECRET)
-  )
-
-
-  fetch(URL + '/services/oauth2/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    },
-    body: str
-  })
-  .then(res => res.json())
-  .then(json => {
-    console.log(json)
-  })
-  .catch(err => {
-    console.log(err)
-    res.send(err)
-  })
-});*/
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

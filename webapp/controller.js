@@ -24,7 +24,7 @@
             },
             body: { signed_request }
         });
-        console.log(response)
+        console.log('server', response)
     }
 
     document.querySelector('#text').textContent = sessionStorage.getItem('signed_request')
