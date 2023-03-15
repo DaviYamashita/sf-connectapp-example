@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script src="/webapp/canvas-all.js"></script>
+    <script src="/webapp/config.js"></script>
+    <script>
+        (() =>{
+        /*Sfdc.canvas.client.refreshSignedRequest(function(data) {
+            console.log(data);
+            if (data.status === 200) {
+                var signedRequest =  data.payload.response;
+                var part = signedRequest.split('.')[1];
+                var obj = JSON.parse(Sfdc.canvas.decode(part));
+                console.log(signedRequest, part, obj);
+            }
+        });
+        console.log(Sfdc.canvas.client.repost());*/
+
+        /*document.querySelector('#res').textContent = (Sfdc.canvas.oauth.loggedin())
+
+        if (!Sfdc.canvas.oauth.loggedin()) {
+            var uri = Sfdc.canvas.oauth.loginUrl();
+            alert(configs.CONSUMER_KEY)
+            Sfdc.canvas.oauth.login(
+                {uri : uri,
+                    params: {
+                        response_type : 'code',
+                        client_id: configs.CONSUMER_KEY,
+                        redirect_uri : encodeURIComponent(
+                                'http://localhost:3000/test')
+               }});
+        }*/
+            /*function contextCallback(msg){
+                var html,context;
+                if(msg.status !== 200){
+                console.log ('error', msg.status);
+                return;
+                }
+
+                console.log(msg);
+                console.log(jsonSyntaxHighlight(msg.payload));
+
+                Sfdc.canvas.client.autogrow(Sfdc.canvas.oauth.client());
+                Sfdc.canvas.byId('canvas-request-string').innerHTML = jsonSyntaxHighlight(msg.payload);
+            }*/
+        
+            function jsonSyntaxHighlight(json) {
+                if (typeof json != 'string') {
+                   json = JSON.stringify(json, undefined, 2);
+                }
+                json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                    var cls = 'number';
+                    if (/^"/.test(match)) {
+                        if (/:$/.test(match)) {
+                            cls = 'key';
+                        } else {
+                            cls = 'string';
+                        }
+                        } else if (/true|false/.test(match)) {
+                            cls = 'boolean';
+                        } else if (/null/.test(match)) {
+                            cls = 'null';
+                        }
+                           return '<span class="' + cls + '">' + match + '</span>';
+                     });
+            }
+        
+            function clickHandler(e) {
+
+                var uri;
+        
+                if (! Sfdc.canvas.oauth.loggedin()) {
+                    // NOTA: Alterar URL quando o ambiente for Produção https://(test/login).salesforce.com/
+                    uri = configs.URL ? configs.URL +'services/oauth2/authorize' : Sfdc.canvas.oauth.loginUrl();
+                    console.log(uri)
+                    Sfdc.canvas.oauth.login(
+                    {uri : uri,
+                    params: {
+                        display : "touch",
+                        response_type : "token",
+                        client_id : configs.CONSUMER_KEY, //Add Your Consumer ID
+                        redirect_uri : encodeURIComponent("http://localhost:3000/callback") //Add your Callback URL
+                    }});
+                }
+                else {
+                    Sfdc.canvas.oauth.logout();
+                }
+                return false;
+            }
+            console.log(Sfdc)
+            console.log(Sfdc.canvas.param())
+        
+            Sfdc.canvas(function() {
+                // On Ready...
+                var login    = Sfdc.canvas.byId("login"),
+                    loggedIn = Sfdc.canvas.oauth.loggedin();
+                login.onclick=clickHandler;
+
+            });
+
+    })();            
+    
+    function callbackAuthorize(url_string) {
+        url_string = decodeURIComponent(url_string).split('#');
+        let obj = {}
+
+        if (url_string[1]) {
+            let t = '';
+            url_string[1].split('&').forEach(function (item) {
+                let s = item.split('=');
+                obj[s[0]] = (s[1]);
+                t+= `\n${s[0]}\n${s[1]}\n`
+            });
+        }
+    }
+
+    </script>
+
+    <div>
+        <a id="login" href="#">Login</a>
+    </div>
+
+    <!-- exemplo -->
+    <!-- <textarea id="text" style="width: 500px; height: 500px;">
+    </textarea> -->
+
+    <!--h1 id="header">OAuth Canvas App</h1>
+        <div>
+
+        <div>
+            Access Token: <span id="access-token"></span>
+        </div>
+        <div id="canvas-content">
+            <h4>Once logged in through OAuth, you can see the JSON representation of Canvas Request below:</h2>
+            <pre><code id="canvas-request-string"></code></pre>
+        </div> 
+        </div-->
+</body>
+</html>
