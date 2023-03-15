@@ -52,7 +52,7 @@ app.post('/refreshToken', (req, res) => {
 
 //obter dados do signed request (somente para *teste de exemplo*)
 app.get('/refreshToken', (req, res) => {
-  res.status(200).send(svdata)
+  res.status(200).json(svdata)
 })
 
 //mapeamento dos arquivos para requisição

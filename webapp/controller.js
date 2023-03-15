@@ -27,7 +27,14 @@
         console.log('server', response)
     }
 
-    document.querySelector('#text').textContent = sessionStorage.getItem('signed_request')
+    fetch('/refreshToken', { method: 'GET', headers: { 'Content-Type': 'application/json' } }).then(async (v) => {
+        let str = JSON.stringify(await v.json()).replaceAll(',', ',\n')
+
+        document.querySelector('#text').textContent = str
+    
+    })
+
+    
 })()
 
 document.querySelector('#btn').addEventListener('click', function() {
@@ -35,7 +42,7 @@ document.querySelector('#btn').addEventListener('click', function() {
         alert("App não está em um frame");
     }
 
-    //Sfdc.canvas.oauth.logout();
+    Sfdc.canvas.oauth.logout();
     window.location.href = 'http://localhost:3000/webapp/auth.html'
     
 });
