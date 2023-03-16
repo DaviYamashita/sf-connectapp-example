@@ -1,0 +1,10 @@
+<apex:page controller="VFAppExController">
+    <apex:canvasApp applicationName="Relatórios" 
+                    developerName="TesteAppConn" 
+                    scrolling="auto" 
+                    height="800px" 
+                    width="100%"
+                    border="none"
+                    parameters="{!renaultParameters}"
+                    />
+</apex:page>
