@@ -1,5 +1,6 @@
 (() => {
-    //refresh da assinatura depois de 1h 50m
+    //https://developer.salesforce.com/docs/atlas.en-us.platform_connect.meta/platform_connect/canvas_app_refresh_signed_request.htm
+    //https://developer.salesforce.com/docs/atlas.en-us.platform_connect.meta/platform_connect/canvas_app_saml_sso_intro.htm
     let refresh = () => setTimeout(() => {
         Sfdc.canvas.client.refreshSignedRequest(function(data) {
             if (data.status === 200) {
@@ -22,7 +23,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: { signed_request }
+            body: JSON.stringify({ signed_request })
         });
         console.log('server', response)
     }

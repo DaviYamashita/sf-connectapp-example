@@ -6,6 +6,7 @@ const { SECRET } = require('./config.json')
 const parseSignedRequest = require('./functions.js').parseSignedRequest
 var cors = require('cors')
 
+
 app.use(cors()); // support cors
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
@@ -39,6 +40,7 @@ app.post('/app', (req, res) => {
 //verificar e guardar novo signed request recebido pelo cliente
 app.post('/refreshToken', (req, res) => {
   try {
+    console.log(req.body)
     let data = parseSignedRequest(req.body.signed_request, SECRET)
     //guardar data
     svdata = data;
@@ -63,6 +65,8 @@ let mapping = {
   '/webapp/auth.html': ['/webapp', 'auth.html'],
   '/callback': ['/webapp', 'callback.html'],
   '/app': ['/webapp', 'auth.html'],
+  '/webapp/auth.js': ['/webapp', 'auth.js'],
+  '/webapp/callback.js': ['/webapp', 'callback.js'],
   '/webapp/config.js': ['/webapp', 'config.js']
 }
 
