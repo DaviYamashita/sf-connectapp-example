@@ -30,12 +30,19 @@
         console.log('server', response)
     }
 
-    fetch('/refreshToken', { method: 'GET', headers: { 'Content-Type': 'application/json' } }).then(async (v) => {
-        let str = JSON.stringify(await v.json()).replaceAll(',', ',\n')
+    Sfdc.canvas(async function() {
+        let v = await fetch('/refreshToken', { method: 'GET', headers: { 'Content-Type': 'application/json' } })
+        let jsobj = await v.json()
 
+        //mostrar na tela o json do signed_request
+        let str = JSON.stringify(jsobj).replaceAll(',', ',\n')
         document.querySelector('#text').textContent = str
-    
-    })
+
+        //canvas autogrow
+        //https://developer.salesforce.com/docs/atlas.en-us.platform_connect.meta/platform_connect/canvas_app_autogrow_code_example.htm
+        sr = jsobj;
+        Sfdc.canvas.client.autogrow(sr.client);
+    });
 
     
 })()

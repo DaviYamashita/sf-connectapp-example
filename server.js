@@ -52,7 +52,7 @@ app.post('/refreshToken', (req, res) => {
 })
 
 
-//obter dados do signed request (somente para *teste de exemplo*)
+//obter dados do signed request do lado do servidor
 app.get('/refreshToken', (req, res) => {
   res.status(200).json(svdata)
 })
