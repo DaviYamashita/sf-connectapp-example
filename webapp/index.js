@@ -1,6 +1,8 @@
 (() => {
     //https://developer.salesforce.com/docs/atlas.en-us.platform_connect.meta/platform_connect/canvas_app_refresh_signed_request.htm
-    //https://developer.salesforce.com/docs/atlas.en-us.platform_connect.meta/platform_connect/canvas_app_saml_sso_intro.htm
+    //https://www.codescience.com/blog/2021/mastering-salesforce-canvas-apps/
+
+
     let refresh = () => setTimeout(() => {
         Sfdc.canvas.client.refreshSignedRequest(function(data) {
             if (data.status === 200) {
