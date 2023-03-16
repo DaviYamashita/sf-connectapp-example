@@ -60,7 +60,7 @@ app.get('/refreshToken', (req, res) => {
 //mapeamento dos arquivos para requisição
 let mapping = { 
   '/webapp/canvas-all.js': ['/node_modules/@salesforce/canvas-js-sdk/js', 'canvas-all.js'],
-  '/webapp/controller.js': ['/webapp', 'controller.js'],
+  '/webapp/index.js': ['/webapp', 'index.js'],
   '/webapp/index.html': ['/webapp', 'index.html'],
   '/webapp/auth.html': ['/webapp', 'auth.html'],
   '/callback': ['/webapp', 'callback.html'],
